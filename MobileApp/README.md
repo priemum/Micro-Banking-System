@@ -11,7 +11,12 @@
       a.	Cash deposit  
       b.	Cash withdrawal    
       (if the customer is not an assigned customer of the agent, only the withdrawal functionality will be available. This transaction will execute as a special request)
-    
+    <p align="center">
+ <img src="/MobileApp/Screenshots/Screenshot2.png" width = 15%>
+ </p>
 3.	Enter bank account number, transaction amount and reference 
-4.	Confirm the transaction and proceed to homepage
+<p align="center">
+ <img src="/MobileApp/Screenshots/Screenshot3.png" width = 15%>
+ </p>
+4.	Confirm the transaction and proceed to homepage<br>
 5.	Log out or perform another transaction
