@@ -1,0 +1,58 @@
+extends base
+
+block content 
+  main.main 
+    // To store card containing details about accounts of the user
+    h2.heading-secondary Savings Accounts
+    if user
+      .card-container 
+        each account in accounts
+          .card
+            .card__header
+              .card__picture
+                .card__picture-overlay &nbsp;
+                img.card__picture-img(src='img/account.jpg', alt='Account')
+              h3.heading-tertirary
+                span Account: #{account.accountNumber}
+
+            .card__details
+              h4.card__sub-heading Your Account Summary
+              .card__data
+                span Balance : #{account.accountBalance}
+              .card__data
+                span Account Type: #{account.accountType}
+              .card__data 
+                span Last Transaction: 
+
+            .card__footer
+              a.btn.btn--green.btn--small(href=`/fd?accNo=${account.accountNumber}`) Add FD
+              a.btn.btn--green.btn--small(href=`account?id=${account.accountNumber}`) Details
+
+      h2.heading-secondary Fixed Deposits
+      .card-container        
+        each fd in fds
+          .card
+            .card__header
+              .card__picture
+                .card__picture-overlay &nbsp;
+                img.card__picture-img(src='img/fixed-deposit.jpg', alt='Account')
+              h3.heading-tertirary
+                span ID - #{fd.FD_ID}
+
+            .card__details
+              h4.card__sub-heading Your Fixed Deposit Summary
+              .card__data 
+                span Savings Account Number: #{fd.accountNumber}
+              .card__data
+                span Amount : #{fd.amount}
+              .card__data
+                span Opening Date: #{fd.openingDate}
+              .card__data
+                span Plan Type: #{fd.planType}
+
+
+            .card__footer
+              a.btn.btn--green.btn--small(href=`/fdwithdraw?id=${fd.FD_ID}`) Withdraw      
+    else  
+      a.nav__el(href="/login") LogIn 
+      a.nav__el(href='/signup') SignUp  

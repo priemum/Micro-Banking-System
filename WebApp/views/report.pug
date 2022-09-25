@@ -1,0 +1,33 @@
+extends base
+
+block content
+
+  section.section-header-2
+    .heading-box
+      h1.heading-secondary
+        - if(accNo)
+          span= `Account: ${accNo}`
+        -if(agentID)
+          span= `Agent: ${agentID}`
+  table
+    caption.overview-box__label #{noOfRecords} records present
+    tr 
+      th
+        span.overview-box__label 
+      th  
+        span.overview-box__label Withdraw 
+      th 
+        span.overview-box__label Deposit 
+      th
+        span.overview-box__label Amount
+    td(style="width:150px; word-wrap: break-word")
+      each transaction in transactions
+        tr
+          .overview-box__detail
+            td: img.overview-box__img(src=`/img/transaction.png`, alt=`transaction-logo`)
+            
+            td: - if (transaction.transactionType === 'Withdraw')
+              span.overview-box__label Withdraw
+            td:  - if (transaction.transactionType === 'Deposit')
+              span.overview-box__label Deposit
+            td: span.overview-box__label #{transaction.transactionAmount} 

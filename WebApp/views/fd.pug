@@ -1,0 +1,25 @@
+extends base
+
+block content
+  main.main
+    .login-form
+      h2.heading-secondary.ma-bt-lg Log into your account
+      form.form.form--fd
+        .form__group
+          label.form__label(for='accountNumber') Account Number
+          input#accountNumber.form__input(type='text', value= `${accNo}`, required)
+        .form__group
+          label.form__label(for='customerID') Customer ID
+          input#customerID.form__input(type='text', value=`${user.customerID}`, required)
+        .form__group
+          label.form__label(for='amount') Amount
+          input#amount.form__input(type='text', placeholder='11111111', required)
+        .form__group
+          label.form__label(for='planType') Plan Type
+          select#planType.form__input(name='planType')
+            option(value='0', selected= true) --SELECT--
+            option(value='Type1') Type 1
+            option(value='Type2') Type 2
+            option(value='Type3') Type 3
+        .form__group
+          button.btn.btn--green Deposit 

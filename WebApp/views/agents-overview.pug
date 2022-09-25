@@ -1,0 +1,33 @@
+extends base
+
+block content 
+  main.main 
+    // To store card containing details about accounts of the user
+    h2.heading-secondary Savings Accounts
+    if user
+      .card-container 
+        each agent in agents
+          .card
+            .card__header
+              .card__picture
+                .card__picture-overlay &nbsp;
+                img.card__picture-img(src='img/account.jpg', alt='Account')
+              h3.heading-tertirary
+                span Agent: #{agent.agentID}
+
+            .card__details
+              h4.card__sub-heading Agent Summary
+              .card__data
+                span Number of Customers : #{agent.noOfCustomers}
+              .card__data
+                span Number of Transactions: #{agent.noOfTransactions}
+              .card__data 
+                span Last Transaction ID: #{agent.lastTransaction}
+
+            .card__footer
+              a.btn.btn--green.btn--small(href=`report?agentID=${agent.agentID}`) Transaction Report
+
+      
+    else  
+      a.nav__el(href="/login") LogIn 
+      a.nav__el(href='/signup') SignUp  

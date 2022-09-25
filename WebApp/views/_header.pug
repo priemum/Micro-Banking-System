@@ -1,0 +1,20 @@
+header.header 
+  // Navigation Bar
+  nav.nav.nav--home
+    .container 
+      .logo 
+        a.nav__el(href='/') MicroBank
+  nav.nav.nav--user 
+    if user 
+      if (!user.isAdmin)
+        a.nav__el(href='#') Welcome #{user.firstName}
+        a.nav__el(href=`/account-overview?id=${user.customerID}`) My Accounts 
+        a.nav__el.logout-button(href="/logout") Log out
+      if user.isAdmin   
+        a.nav__el(href='#') Welcome #{user.firstName}
+        a.nav__el(href=`/all-accounts`) All Accounts
+        a.nav__el(href=`/all-agents`) All Agents
+        a.nav__el.logout-button(href="/logout") Log out
+    else 
+      a.nav__el(href="/login") LogIn 
+      a.nav__el(href='/signup') SignUp

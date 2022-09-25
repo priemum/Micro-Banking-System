@@ -1,0 +1,30 @@
+doctype html
+
+html
+  head 
+    meta(charset='UTF-8')
+    meta(name='viewport' content="width=device-width initial-scale=1.0")    
+    link(rel='stylesheet' href='css/base-style.css')
+    link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700')
+    link(rel='shortcut icon' type='image/png' href='img/dark-circle.png')
+    title MicroBank | #{title}
+  
+  body 
+    // Header
+    include _header
+
+    // Content
+    block content 
+      h1 placeholder
+
+    // Footer
+    include _footer  
+
+
+    
+    
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js')
+    script(src='/js/fd.js')
+    script(src='/js/login.js')
+    //script(src='/js/bundle.js')
+

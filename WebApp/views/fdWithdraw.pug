@@ -1,0 +1,13 @@
+extends base
+
+block content
+  main.main
+    .withdraw-form
+      h2.heading-secondary.ma-bt-lg Withdraw Your FD
+      form.form.form--withdraw
+        .form__group
+          label.form__label(for='FD_ID') FD_ID
+          input#FD_ID.form__input(type='text', value= `${FD_ID}`, required)
+        
+        .form__group
+          button.btn.btn--green Withdraw 

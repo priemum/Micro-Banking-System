@@ -1,0 +1,19 @@
+CREATE TABLE `FDInterest` ( `Period` Date, `Rate` Float, PRIMARY KEY (`Period`) );
+
+CREATE TABLE `FixedDeposits` ( `AccountNumber` VarChar(20), `{CustomerNIC}` VarChar(10), `Amount` float, `OpeningDate` Date, `Period` Date, `PlanType` Enum ('Type1', 'Type2', 'Type3'), PRIMARY KEY (`AccountNumber`), FOREIGN KEY (`Period`) REFERENCES `FDInterest`(`Period`) );
+
+CREATE TABLE `LocalAccount` ( `AccountNumber` VarChar(20), `CustomerNIC` VarChar(20), `Password` VarChar(20), `Balance` float, PRIMARY KEY (`AccountNumber`) );
+
+CREATE TABLE `InterestRates` ( `AccountType` Enum ('Children', 'Teen', 'Senior', 'Joint'), `InterestRate` Float, `MinimumAmount` float, PRIMARY KEY (`AccountType`) );
+
+CREATE TABLE `AgentDetails` ( `AgentID` VarChar(10), `AgentNIC` VarChar(10), `ContactNo.` VarChar(10), `Name` VarChar(50), PRIMARY KEY (`AgentID`) );
+
+CREATE TABLE `Customer` ( `CustomerNIC` VarChar(10), `Name` VarChar(50), `ContactNumber` VarChar(10), `Address` VarChar(100), `Birthday` Date, `Password` VarChar(20), PRIMARY KEY (`CustomerNIC`) );
+
+CREATE TABLE `Accounts` ( `AccountNumber` VarChar(20), `CustomerNIC` VarChar(10), `AccountType` Enum ('Children', 'Teen', 'Adult', 'Senior'), `AgentID` VarChar(10), `AccountBalance` float, PRIMARY KEY (`AccountNumber`), FOREIGN KEY (`AccountType`) REFERENCES `InterestRates`(`AccountType`), FOREIGN KEY (`AgentID`) REFERENCES `AgentDetails`(`AgentID`), FOREIGN KEY (`CustomerNIC`) REFERENCES `Customer`(`CustomerNIC`) );
+
+CREATE TABLE `Transaction` ( `TransactionID` VarChar(10), `AccountNumber` VarChar(15), `Date` Date, `Time` date, `TransactionType` Enum ('Withdraw', 'Deposit'), `AccountType` Enum ('Children', 'Teen', 'Senior'), `TransactionAmount` float, `TransactionCharge` float, PRIMARY KEY (`TransactionID`), FOREIGN KEY (`AccountNumber`) REFERENCES `Accounts`(`AccountNumber`) );
+
+CREATE TABLE `LocalTransactionLog` ( `TransactionID` VarChar(10), `AccountNumber` VarChar(15), `Date` Date, `Time` Time, `TransactionType` Enum ('Withdraw', 'Deposit'), `AccountType` Enum ('Children', 'Teen', 'Senior'), `TransactionAmount` float, `TransactionCharge` float, PRIMARY KEY (`TransactionID`), FOREIGN KEY (`AccountNumber`) REFERENCES `LocalAccount`(`AccountNumber`) );
+
+CREATE TABLE `JointAccounts` ( `AccountNumber` VarChar(20), `{CustomerNIC}` VarChar(10), `AccountBalance` float, PRIMARY KEY (`AccountNumber`) );

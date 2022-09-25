@@ -1,0 +1,27 @@
+extends base
+
+block content
+  main.main
+    .login-form
+      h2.heading-secondary.ma-bt-lg Sign up to a New Account
+      form.form.form--login
+        .form__group
+          label.form__label(for='customerNIC') Customer NIC
+          input#email.form__input(type='text', placeholder='xxxxxxxx', required)
+        .form__group
+          label.form__label(for='firstName') First Name
+          input#email.form__input(type='text', placeholder='Peter', required)
+        .form__group
+          label.form__label(for='lastName') Last Name
+          input#email.form__input(type='text', placeholder='Griffin', required)
+        .form__group
+          label.form__label(for='birthday') Birthday
+          input#email.form__input(type='date', placeholder='xxxxxxxx', required)
+        .form__group.ma-bt-md
+          label.form__label(for='password') Password
+          input#password.form__input(type='password', placeholder='••••••••', required, minlength='2')
+        .form__group.ma-bt-md
+          label.form__label(for='password') Confirm Password
+          input#password.form__input(type='password', placeholder='••••••••', required, minlength='2')
+        .form__group
+          button.btn.btn--green Login
