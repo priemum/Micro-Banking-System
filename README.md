@@ -40,6 +40,9 @@ There are other main functionalities that are automatically implemented in the s
 ## Methodology
 
 The ER diagram for the database is given below.
+<p align="center">
+ <img src="Screenshot_32.png" width = 55%>
+ </p>
 
 For the development of the microbank app, we used Android Studio. The local database was designed using MySQL lite. 
 The central database was developed using MySQL. Backened functions were implemented using Node.js and the UI was rendered using Pug.
