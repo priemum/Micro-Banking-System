@@ -19,19 +19,6 @@ This app performs the following functionalities for the customer:
 After a certain number of transactions (in this prototype we have set this number to 10), or, after a certain period of time (here, it is 24 hours) the app will automatically update the central server with the transactions in its local database. 
 Transactions done through multiple agent withdrawal facility or special request will be updated in the server immediately. They are not stored in the local database.
 
-#### Using the app 
-
-1.	Log into the app using the customer ID and password
-2.	Select the desired function:
-
-      a.	Cash deposit  
-      b.	Cash withdrawal    
-      (if the customer is not an assigned customer of the agent, only the withdrawal functionality will be available. This transaction will execute as a special request)
-    
-3.	Enter bank account number, transaction amount and reference 
-4.	Confirm the transaction and proceed to homepage
-5.	Log out or perform another transaction
-
 ### The Central Server
 
 The bank administrators are responsible for the following functionalities that are implemented in the central server.
