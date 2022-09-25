@@ -4,8 +4,10 @@
  ## Using the app 
 
 1.	Log into the app using the customer ID and password
+<p align="center">
+ <img src="/MobileApp/Screenshots/Screenshot1.png" width = 15%>
+ </p>
 2.	Select the desired function:
-
       a.	Cash deposit  
       b.	Cash withdrawal    
       (if the customer is not an assigned customer of the agent, only the withdrawal functionality will be available. This transaction will execute as a special request)
