@@ -37,3 +37,10 @@ There are other main functionalities that are automatically implemented in the s
 *	Calculating interest rates and updating the account balances accordingly (the rates differ for each account type)
 *	Calculating the monthly interests for FD and updating the linked savings account
 
+## Methodology
+
+The ER diagram for the database is given below.
+
+For the development of the microbank app, we used Android Studio. The local database was designed using MySQL lite. 
+The central database was developed using MySQL. Backened functions were implemented using Node.js and the UI was rendered using Pug.
+
