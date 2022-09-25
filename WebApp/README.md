@@ -1,6 +1,13 @@
-# CS3042_GR6
-MicroBanking System for CS3042 Semester project
+# Web App for Central Server
 
-TO-DO:
-1) Reports
-2) Views
+#### Creating new customer accounts
+
+#### Creating FDs
+
+#### Viewing reports
+
+#### Calculating interest rates of normal savings accounts
+
+#### Calculating interest rates for FDs
+
+
