@@ -76,7 +76,9 @@ The OkHttp3 library was used to send http requests to the server. The LoadCustom
 
 Updating the central database is an essential function in this system. If the transactions table has 50 transactions or the time period has been 24 hours since the last update, then all these transactions are sent to the central database and the transactions table in it is updated. 
 
-To check if the transactions table has 50 entries, we simply call an SQL query in the [checkForUpdate()](Micro-Banking-System/MobileApp/app/src/main/java/com/example/microbank/data/Implementation/TransactionDAO_Imp.java) method in TransactionDAO_Imp file.
+To check if the transactions table has 50 entries, we simply call an SQL query in the [checkForUpdate()](https://github.com/Wenuka19/Micro-Banking-System/blob/main/MobileApp/app/src/main/java/com/example/microbank/data/Implementation/TransactionDAO_Imp.java) method in TransactionDAO_Imp file.
+
+##### Alarm function
 
 
 
