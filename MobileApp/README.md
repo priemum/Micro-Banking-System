@@ -74,11 +74,88 @@ The OkHttp3 library was used to send http requests to the server. The LoadCustom
 
 #### 2. Updating Central Database
 
-Updating the central database is an essential function in this system. If the transactions table has 50 transactions or the time period has been 24 hours since the last update, then all these transactions are sent to the central database and the transactions table in it is updated. 
+Updating the central database is an essential function in this system. If the transactions table has 50 transactions or the time period has been 24 hours since the last update, then all these transactions are sent to the central database and the transactions table in it is updated. Given below are some snippets of the [method](https://github.com/Wenuka19/Micro-Banking-System/blob/0d13583335a5e9fc1bbb8cbd778029304438bf2f/MobileApp/app/src/main/java/com/example/microbank/data/Implementation/TransactionDAO_Imp.java#L63) for updating the central database in the TransactionDAO_Imp class.
 
-To check if the transactions table has 50 entries, we simply call an SQL query in the [checkForUpdate()](https://github.com/Wenuka19/Micro-Banking-System/blob/main/MobileApp/app/src/main/java/com/example/microbank/data/Implementation/TransactionDAO_Imp.java) method in TransactionDAO_Imp file.
+First all transactions in the Transactions table are selected. 
+```java
+
+public void updateCentralDB(boolean alarm) throws IOException {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String trs = "SELECT * FROM TRANSACTIONS";
+        Cursor cursor = db.rawQuery(trs, null);
+```
+Next, we check if the one of the 2 above mentioned conditions are satisfied. checkForUpdate() method checks if 50 transactions are completed, and 'alarm' is the boolean value that is passed if the alarm trigger is received.
+If at least one condition is true, then all transactions are converted into a JSONArray object so they can be sent via an API call to the central database. 
+
+```java
+
+        if (checkForUpdate() || alarm){
+            JSONArray arr = cur2Json(cursor);
+            JSONObject obj = new JSONObject();
+            try {
+                obj.put("data", arr);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+```
+The OkHttpClient class is used to send the post request with the transactions JSONArray. After this API call is sent, the Transaction table in the local database is fully cleared by calling the clearTransactionsTable() method.
+
+```java
+
+            MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+            OkHttpClient client = new OkHttpClient();
+            HttpUrl url = new HttpUrl.Builder().scheme("http").host(HOST_IP).port(3000).addPathSegment("api").addPathSegment("v1").addPathSegment("transaction").addQueryParameter("id", AGENT_ID).build();
+            RequestBody body = RequestBody.create(JSON, obj.toString());
+            Request request = new Request.Builder()
+                    .url(url)
+                    .post(body)
+                    .build();
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    Log.d("TRUPDFail", "onFailure: no response");
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    String dataString = response.body().string();
+                    Log.d("TRUPDPass", "response received : " + dataString);
+                }
+            });
+           clearTransactionsTable();
+        }
+
+    }
+```
+
+
+To check if the transactions table has 50 entries, we simply call an SQL query in the [checkForUpdate()](https://github.com/Wenuka19/Micro-Banking-System/blob/main/MobileApp/app/src/main/java/com/example/microbank/data/Implementation/TransactionDAO_Imp.java) method in TransactionDAO_Imp file. 
+
+To update the central database at every 24 hours, we used a recurring alarm. The [SyncService](https://github.com/Wenuka19/Micro-Banking-System/blob/main/MobileApp/app/src/main/java/com/example/microbank/Control/SyncService.java) class, which is extended from BroadcastReceiver class, is used to trigger the update of central database once the alarm is received. 
+
+Given below is the function to set the alarm in the [UpdateTrigger](https://github.com/Wenuka19/Micro-Banking-System/blob/main/MobileApp/app/src/main/java/com/example/microbank/Control/UpdateTrigger.java) class.
 
 ##### Alarm function
+
+```java
+
+ public void setAlarm(Class _class){
+        Intent intent = new Intent(context, _class);
+        PendingIntent pIntent = PendingIntent.getBroadcast(context, 2, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+        if (alarmManager != null){
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.HOUR_OF_DAY, 02);
+            calendar.set(Calendar.MINUTE, 00);
+            calendar.set(Calendar.SECOND, 00);
+            long firstMillis = calendar.getTimeInMillis();
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, firstMillis,AlarmManager.INTERVAL_DAY, pIntent);
+            Log.d("TRIGGER","Trigger is Set");
+        }
+    }
+  ```    
+Here, the AlarmManager class and Calendar classes were used to set the alarm at 02:00, and it is set to repeat at the interval of 1 day (AlarmManager.INTERVAL_DAY).  
 
 
 
