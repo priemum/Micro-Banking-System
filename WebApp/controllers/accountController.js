@@ -5,7 +5,7 @@ const tableName = "accounts";
 exports.createAccount = async (req, res) => {
   try {
     // Check if the user exists
-
+ 
     const accountCols = `accountNumber, accountType, accountBalance`;
     const accountHoldersCols = `accountNumber, customerID`;
 
